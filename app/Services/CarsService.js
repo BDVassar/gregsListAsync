@@ -5,6 +5,7 @@ import { Pop } from "../Utils/Pop.js"
 
 class CarsService {
   async editCar(carData, id) {
+    // @ts-ignore
     const res = await axios.put('https://bcw-sandbox.herokuapp.com/api/cars/' + id, carData)
     console.log('[EDIT CAR]', res.data);
     // find the one we edited in the appstate
@@ -21,16 +22,19 @@ class CarsService {
   }
 
   async getCars() {
+    // @ts-ignore
     const res = await axios.get('https://bcw-sandbox.herokuapp.com/api/cars')
     console.log('[GOT CARS]', res.data) //NOTE - REALLY import to check got data.
     appState.cars = res.data.map(c => new Car(c))
   }
   async createCar(carData) {
+    // @ts-ignore
     const res = await axios.post('https://bcw-sandbox.herokuapp.com/api/cars', carData)
     console.log('[POST CAR]', res.data);
     appState.cars = [...appState.cars, new Car(res.data)]
   }
   async removeCar(id) {
+    // @ts-ignore
     const res = await axios.delete('https://bcw-sandbox.herokuapp.com/api/cars/' + id)
     console.log('[DELETE CAR]', res.data);
     Pop.toast(res.data, 'success')

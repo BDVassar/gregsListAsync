@@ -23,8 +23,8 @@ export class CarsController {
   constructor() {
     appState.on('cars', _drawCars)
     appState.on('activeCar', _drawCarForm)
-    this.getCars()
-    _drawCarForm()
+
+
   }
 
 
@@ -44,6 +44,7 @@ export class CarsController {
       const form = window.event.target
       let carData = getFormData(form)
       Pop.toast('Created', 'success')
+      // @ts-ignore
       form.reset()
       console.log(carData);
       await carsService.createCar(carData)
@@ -65,6 +66,7 @@ export class CarsController {
       console.log('editing', form);
       await carsService.editCar(carData, id)
       Pop.toast('edited', 'info')
+      // @ts-ignore
       form.reset()
     } catch (error) {
       Pop.error(error.message)
@@ -84,4 +86,8 @@ export class CarsController {
     }
   }
 
+  showCars() {
+    this.getCars()
+    _drawCarForm()
+  }
 }
